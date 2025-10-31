@@ -11,15 +11,21 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
+    <div id="music-modal">
+      <div class="modal-content">
+        <h2>Hadiah Spesial Untukmu, MayMay</h2>
+        <p>Sentuh layar untuk memulai pengalaman ini dengan musik...</p>
+        <button id="play-music-button">❤️ Klik Untuk Membuka ❤️</button>
+      </div>
+    </div>
     <audio id="background-music" loop>
       <source src="music/lagu-spesial.mp3" type="audio/mpeg">
       Browser Anda tidak mendukung elemen audio.
     </audio>
-    <div id="particle-container"></div>
+
     <div id="particle-container"></div>
 
     <section class="hero-section section">
@@ -51,7 +57,7 @@
             <img src="img/img-4.jpg" alt="Kenangan 4">
             <p class="caption">Masa depan bersamamu adalah impianku.</p>
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -61,14 +67,17 @@
         <h2 class="section-title reveal">3 Alasan Aku Mencintaimu</h2>
         <div class="reasons-grid">
           <div class="reason-item reveal">
+            <div class="reason-icon">💖</div>
             <h3>Caramu Tertawa</h3>
             <p>Tawamu adalah musik terindah yang selalu ingin kudengar setiap hari.</p>
           </div>
           <div class="reason-item reveal">
+            <div class="reason-icon">✨</div>
             <h3>Kebaikan Hatimu</h3>
             <p>Kamu selalu melihat yang terbaik dari orang lain dan itu menginspirasiku.</p>
           </div>
           <div class="reason-item reveal">
+            <div class="reason-icon">🤝</div>
             <h3>Dukunganmu</h3>
             <p>Kamu adalah pendukung terbesarku, selalu ada di saat aku senang maupun susah.</p>
           </div>
