@@ -4,28 +4,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const musicModal = document.getElementById("music-modal");
   const playButton = document.getElementById("play-music-button");
 
-  // Fungsi untuk memainkan musik dan menutup modal
   function playMusicAndStart() {
-    // Mainkan musik
     audio.play().catch((error) => {
-      // Ini akan muncul jika ada masalah, tapi seharusnya tidak
       console.warn("Musik gagal diputar:", error);
     });
 
-    // Sembunyikan modal dengan animasi fade-out
     musicModal.style.opacity = "0";
 
-    // Hapus modal setelah animasi selesai agar tidak menghalangi scroll
     setTimeout(() => {
       musicModal.style.display = "none";
-    }, 700); // 700ms = durasi transisi 0.7s di CSS
+    }, 700);
   }
 
-  // Dengarkan klik HANYA pada tombol di modal
   playButton.addEventListener("click", playMusicAndStart);
 
   // -----------------------------------------------------------------
-  // SISA KODE (TIDAK BERUBAH)
+  // SISA KODE (REVEAL ANIMATION TIDAK BERUBAH)
   // -----------------------------------------------------------------
 
   // 1. Reveal Animations on Scroll (Intersection Observer)
@@ -36,11 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+          // Opsi: Berhenti mengamati setelah terlihat
+          // observer.unobserve(entry.target);
         }
       });
     },
     {
-      threshold: 0.2, // Trigger when 20% of the element is visible
+      threshold: 0.15, // Sedikit lebih cepat ter-trigger
     }
   );
 
@@ -48,9 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el);
   });
 
-  // 2. Particle Animation (Hearts & Flowers) on Touch/Scroll
+  // -----------------------------------------------------------------
+  // PERUBAHAN BESAR 6: Partikel yang Lebih Modern
+  // -----------------------------------------------------------------
+
   const particleContainer = document.getElementById("particle-container");
-  const icons = ["❤️", "🌸", "💖", "🌼", "✨", "🥰"];
+  // Mengganti emoji bunga/hati dengan 'sparks' dan 'dots' yang lebih abstrak
+  const icons = ["•", "·", "✶", "✨"];
 
   function createParticle(x, y) {
     const particle = document.createElement("div");
@@ -60,16 +60,26 @@ document.addEventListener("DOMContentLoaded", () => {
     particle.style.top = `${y}px`;
     particle.innerHTML = icons[Math.floor(Math.random() * icons.length)];
 
-    const randomSize = Math.random() * 0.7 + 1; // 1rem - 1.7rem
+    // Ukuran partikel dibuat lebih kecil dan random
+    const randomSize = Math.random() * 0.5 + 0.5; // 0.5rem - 1.0rem
     particle.style.fontSize = `${randomSize}rem`;
-    particle.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    // Warna partikel dibuat random (abu-abu, pink, atau putih)
+    const randomColor = ["#C06C84", "#FBFBFB", "#999"][Math.floor(Math.random() * 3)];
+    particle.style.color = randomColor;
+
+    // Durasi animasi partikel dibuat random agar lebih natural
+    const randomDuration = Math.random() * 1.5 + 1; // 1 detik - 2.5 detik
+    particle.style.animationDuration = `${randomDuration}s`;
+
     particle.style.opacity = Math.random() * 0.5 + 0.5;
 
     particleContainer.appendChild(particle);
 
+    // Hapus partikel setelah animasinya selesai
     setTimeout(() => {
       particle.remove();
-    }, 2000);
+    }, randomDuration * 1000); // Sesuaikan dengan durasi animasi
   }
 
   function handleParticleEvent(e) {
